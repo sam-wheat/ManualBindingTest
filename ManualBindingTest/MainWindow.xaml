@@ -13,6 +13,8 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center">
         
+        <TextBlock Text="{Binding Message}" FontSize="20" FontWeight="Bold" Margin="0,10,0,40"/>
+        
         <StackPanel Orientation="Horizontal" BorderBrush="Red" BorderThickness="2" Margin="8" Padding="20" >
             <TextBlock Text="Added in MainWindow XAML:" Margin="0,0,20,0"/>
             <local:ContainerControl Command="{Binding Command, Mode=OneWay}" />
