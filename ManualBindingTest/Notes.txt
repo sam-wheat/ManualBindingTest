@@ -1,4 +1,4 @@
-﻿Binding created in Control fails with Invalid cast
+﻿Binding created in programatically Control fails with Invalid cast
 
 	<Window>
 		<ButtonContainer>
@@ -51,3 +51,5 @@ An instance of `Button` exists in `ButtonContainer` XMAL.
 Buttons in blue border work
 First button in red border works
 Second button in red border fails
+
+[Possibly related](https://github.com/microsoft/microsoft-ui-xaml/issues/4654)
