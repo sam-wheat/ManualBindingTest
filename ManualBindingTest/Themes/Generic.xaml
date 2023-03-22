@@ -1,0 +1,35 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ManualBindingTest">
+
+    <Style TargetType="local:ButtonControl" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ButtonControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Button Content="Click me" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InternalCommand, Mode=OneWay}" CommandParameter="10" ></Button>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:ContainerControl" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ContainerControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <local:ButtonControl Command="{Binding Command, Mode=OneWay}"  />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
