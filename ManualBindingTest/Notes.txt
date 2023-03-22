@@ -1,0 +1,53 @@
+﻿Binding created in Control fails with Invalid cast
+
+	<Window>
+		<ButtonContainer>
+			<ButtonControl></ButtonControl>
+		</ButtonContainer>
+	</Window>
+
+
+
+In my production app I need to 1.) create and add controls to a parent programatically, and 2.) propagate events via bindings to multiple ancestor controls.  
+With regard to above psudo XAML I need to create instances of `ButtonContainer` in `Window`, and I need to create instances of `ButtonControl` in `ButtonContainer`.
+Events in `ButtonControl` need to be propagated up through `ButtonContainer` and handled in `Window`.
+
+
+[This repo](https://github.com/sam-wheat/ManualBindingTest) attempts to implement objectives above.  When `Window` creates an instance of `ButtonContainer` it works.  
+When `ButtonContainer` creates an instance of `Button` it crashes when a binding created in code is executed:
+
+> System.InvalidCastException
+  HResult=0x80004002
+  Message=Specified cast is not valid.
+  Source=WinRT.Runtime
+  StackTrace:
+   at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw|20_0(Int32 hr)
+   at WinRT.IWinRTObject.IsInterfaceImplementedFallback(RuntimeTypeHandle interfaceType, Boolean throwIfNotImplemented)
+   at WinRT.IWinRTObject.System.Runtime.InteropServices.IDynamicInterfaceCastable.IsInterfaceImplemented(RuntimeTypeHandle interfaceType, Boolean throwIfNotImplemented)
+   at ManualBindingTest.ButtonControl.get_Command() in C:\Projects\ManualBindingTest\ManualBindingTest\ButtonControl.cs:line 38
+   at ManualBindingTest.ButtonControl.<.ctor>b__8_0(Object x) in C:\Projects\ManualBindingTest\ManualBindingTest\ButtonControl.cs:line 55
+   at CommunityToolkit.Mvvm.Input.RelayCommand`1.Execute(Object parameter)
+   at ABI.System.Windows.Input.ICommand.Vftbl.Do_Abi_Execute_3(IntPtr thisPtr, IntPtr parameter)
+
+
+
+
+
+Steps to reproduce
+[Clone this repo](https://github.com/sam-wheat/ManualBindingTest)
+
+Checkout branch master - happy path
+In this code an instance of `ButtonContainer` exists in XAML on MainPage.
+MainPage adds another instance of `ButtonContainer` in code.
+Both buttons on MainPage work
+
+Checkout branch experiment1
+In this code an instance of `ButtonContainer` exists in XAML on MainPage.
+MainPage adds another instance of `ButtonContainer` in code.
+An instance of `Button` exists in `ButtonContainer` XMAL.
+`ButtonContainer` creates a new instance of `ButtonControl` in code exactly the same way as `MainPage` creates an instance of `ButtonContainer`.  However binding for this instance fails.
+
+
+Buttons in blue border work
+First button in red border works
+Second button in red border fails

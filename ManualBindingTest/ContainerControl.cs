@@ -32,11 +32,5 @@ public sealed class ContainerControl : Control
     public ContainerControl()
     {
         this.DefaultStyleKey = typeof(ContainerControl);
-
-        //Command = new RelayCommand<object>(x =>
-        //{
-        //    int arg = Convert.ToInt32(x) + 1;
-            
-        //});
     }
 }
