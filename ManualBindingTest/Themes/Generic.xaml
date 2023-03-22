@@ -11,7 +11,9 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
+                        
                         <Button Content="Click me" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InternalCommand, Mode=OneWay}" CommandParameter="10" ></Button>
+                        
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -22,11 +24,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ContainerControl">
-                    <Border
+                    <Border 
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <local:ButtonControl Command="{Binding Command, Mode=OneWay}"  />
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text="Added in ContainerControl XAML:"/>
+                                <local:ButtonControl Command="{Binding Command, Mode=OneWay}"  />
+                            </StackPanel>
+
+                            <StackPanel x:Name="layoutRoot" Orientation="Horizontal">
+                                <TextBlock Text="Added in ContainerControl Code:"/>
+                            </StackPanel>
+                        </StackPanel>
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

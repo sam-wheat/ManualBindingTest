@@ -9,12 +9,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <StackPanel x:Name="layoutRoot" 
-                Orientation="Horizontal" 
+    <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center" DataContext="{Binding ElementName=thisControl}">
+                VerticalAlignment="Center">
         
-        <local:ContainerControl Command="{Binding Command, Mode=OneWay}" />
+        <StackPanel Orientation="Horizontal" BorderBrush="Red" BorderThickness="2" Margin="8" Padding="20" >
+            <TextBlock Text="Added in MainWindow XAML:" Margin="0,0,20,0"/>
+            <local:ContainerControl Command="{Binding Command, Mode=OneWay}" />
+        </StackPanel>
+        
+        
+        <StackPanel x:Name="layoutRoot" 
+                    Orientation="Horizontal" 
+                    DataContext="{Binding ElementName=thisControl}"
+                    BorderBrush="Blue" BorderThickness="2" Margin="8" Padding="20" >
+            <TextBlock Text="Added in MainWindow Code: "  Margin="0,0,20,0"/>
+        </StackPanel>
     </StackPanel>
 </Window>

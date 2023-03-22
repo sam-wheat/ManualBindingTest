@@ -36,7 +36,24 @@ public sealed class ContainerControl : Control
         //Command = new RelayCommand<object>(x =>
         //{
         //    int arg = Convert.ToInt32(x) + 1;
-            
+
         //});
+
+
+        
+    }
+    protected override void OnApplyTemplate()
+    {
+        //return;
+
+        
+        // Add a new instance of ButtonControl and bind its Command to the Command on this control
+        ButtonControl bc = new();
+        Binding b = new() { Mode = BindingMode.OneWay };
+        b.Source = Command;
+        bc.SetBinding(ButtonControl.CommandProperty, b);
+        StackPanel layoutRoot = GetTemplateChild("layoutRoot") as StackPanel;
+        layoutRoot.Children.Add(bc);
+        base.OnApplyTemplate();
     }
 }
